@@ -11,12 +11,11 @@ class UsersController < ApplicationController
     if @user.save
       UserMailer.with(to: "test@example.com", name: "dic").welcome.deliver_now # 追加
       log_in(@user)
-      #redirect_to user_path(@user.id), notice: 'アカウントを登録しました。'
-      format.html { redirect_to user_path(@user.id), notice:  'アカウントを登録しました。' }
-      format.json { render :show, status: :created, location: @user }
+      
+      redirect_to user_path(@user.id), notice:  'アカウントを登録しました。' 
+      
     else
-      format.html { render :new }
-      format.json { render json: @user.errors, status: :unprocessable_entity }
+       render :new 
       #render :new
     end
   end
